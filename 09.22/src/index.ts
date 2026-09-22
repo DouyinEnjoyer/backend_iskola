@@ -77,20 +77,14 @@ getvalami<string>("hallo").then((text) => console.log(text.length))
 
 // itt
 
-interface IUser {
-  id: number;
-  name: string;
-  email: string;
-}
+import { getUsers } from "./functions.ts"
 
-async function getUsers(): Promise<IUser[]> {
-  const response = await fetch("https://example.com/api/users");
-  if (!response.ok) {
-    throw new Error("HTTP Error");
-  }
-  const users: IUser[] = await response.json();
 
-  return users;
-}
 getUsers().then((v)=> console.log(v)).catch((e)=> console.log("hiba"))
 
+try {
+    console.log(await getUsers())
+}
+catch{
+    console.log("hibak")
+}
