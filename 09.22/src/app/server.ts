@@ -1,26 +1,26 @@
-import express  from "express";
-import type {Request,Response} from "express";
-import data from "./data/data.ts"
+import express from "express";
+import type { Request, Response } from "express";
+import data from "./data/data.ts";
 
 //09.24
-const app = express()
+const app = express();
 
-app.use(express.json())
+app.use(express.json());
 
-app.get("/",(req:Request,res:Response)=>{
-    res.json({
-        message: "hello,fut a szerver"
-    })
-})
-app.get("/products",(req:Request,res:Response)=>{
-    res.json({
-        data
-    })
-})
+app.get("/", (req: Request, res: Response) => {
+  res.json({
+    message: "hello,fut a szerver",
+  });
+});
+app.get("/products", (req: Request, res: Response) => {
+  res.json({
+    data,
+  });
+});
 
 app.get("/products-table", (req: Request, res: Response) => {
-    let tableHtml = `
-        <table border="1" style="border-collapse: collapse; text-align: left; width: 100%;">
+  let tableHtml = `
+        <table border="1" style="text-align: middle; width: 70%;">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -38,8 +38,8 @@ app.get("/products-table", (req: Request, res: Response) => {
             <tbody>
     `;
 
-    data.forEach(product => {
-        tableHtml += ` <tr>
+  data.forEach((product) => {
+    tableHtml += ` <tr>
                 <td>${product.id}</td>
                 <td>${product.name}</td>
                 <td>${product.category}</td>
@@ -52,35 +52,36 @@ app.get("/products-table", (req: Request, res: Response) => {
                 <td>${product.image}</td>
             </tr>
         `;
-    });
+  });
 
-    tableHtml += ` </tbody>
+  tableHtml += ` </tbody>
     </table>`;
-    
-    res.send(tableHtml);
+
+  res.send(tableHtml);
 });
 
 
-app.post("/a",(req:Request,res:Response)=>{
-    res.send("szoveg")
-})
-app.put("/",(req:Request,res:Response)=>{
-    res.json({
-        message: "Hello, ez egy put"
-    })
-})
-app.delete("/",(req:Request,res:Response)=>{
-    res.json({
-        message: "Hello, ez egy delete"
-    })
-})
-app.patch("/",(req:Request,res:Response)=>{
-    res.json({
-        message: "Hello, ez egy patch"
-    })
-})
 
 
-app.listen(3000,()=>{
-    console.log("fut a server")
-})
+app.post("/a", (req: Request, res: Response) => {
+  res.send("szoveg");
+});
+app.put("/", (req: Request, res: Response) => {
+  res.json({
+    message: "Hello, ez egy put",
+  });
+});
+app.delete("/", (req: Request, res: Response) => {
+  res.json({
+    message: "Hello, ez egy delete",
+  });
+});
+app.patch("/", (req: Request, res: Response) => {
+  res.json({
+    message: "Hello, ez egy patch",
+  });
+});
+
+app.listen(3000, () => {
+  console.log("fut a server");
+});
